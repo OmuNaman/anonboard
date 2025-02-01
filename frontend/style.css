@@ -1,0 +1,409 @@
+/* frontend/style.css - Reddit UI Inspired - Version 3 Refinements */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #DAE0E6; /* Reddit background color */
+    color: #1a1a1b; /* Reddit text color - almost black */
+    line-height: 1.5;
+}
+
+/* Container and Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: transparent;
+}
+
+.header {
+    background-color: #fff;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0; /* Lighter header border */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.4em; /* Slightly smaller header title */
+    font-weight: bold;
+    color: #1a1a1b;
+}
+
+#username-display {
+    padding: 6px 10px; /* Smaller padding */
+    background-color: #f8f8f8; /* Even lighter username background */
+    border-radius: 20px;
+    font-size: 0.85em; /* Smaller username text */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    color: #555; /* Grayer username text */
+}
+
+.main-content {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Threads Section - Left Side */
+#threads-section {
+    flex: 0 0 68%; /* Slightly wider threads area */
+    margin-right: 20px;
+}
+
+.section {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #e8e8e8; /* Very light section border */
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Even subtler shadow */
+}
+
+.section h2, .section h3 {
+    color: #1a1a1b;
+    margin: 12px 20px; /* Reduced section heading margin */
+    font-size: 1.15em; /* Slightly smaller section headings */
+    font-weight: bold;
+}
+
+/* Create Thread Section - Above Threads List - Less Prominent */
+#create-thread-section {
+    margin-bottom: 18px; /* Adjusted margin */
+    border: none; /* Remove border */
+    background-color: transparent; /* Transparent background */
+    padding: 0; /* No padding on create thread section */
+    box-shadow: none; /* Remove shadow */
+}
+
+#create-thread-section h2 {
+    font-size: 1.2em; /* Slightly smaller create thread heading */
+    margin: 0 0 10px 0; /* Adjusted margin for heading */
+    padding-left: 5px; /* Slight indent */
+    color: #333; /* Darker heading text */
+    font-weight: bold;
+}
+
+
+input[type="text"], textarea {
+    width: calc(100% - 24px); /* Adjusted width for padding */
+    padding: 8px 12px; /* Smaller padding for input fields */
+    margin: 0 12px 12px 12px; /* Adjusted margins for input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.95em; /* Slightly smaller input text */
+    background-color: #fefefe; /* Very light input background */
+}
+
+textarea {
+    height: 100px; /* Slightly shorter textarea again */
+    font-family: monospace;
+}
+
+button {
+    padding: 8px 18px; /* Smaller button padding */
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 0.95em; /* Smaller button text */
+    transition: background-color 0.2s;
+    margin: 0 12px 15px 12px; /* Consistent margins like inputs */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Thread List and Items - More Refined Cards */
+.thread-list {
+    margin-top: 0;
+}
+
+.thread-item {
+    padding: 15px 18px; /* Adjusted padding in thread items */
+    margin-bottom: 6px; /* Even less margin between threads */
+    background-color: #fff;
+    border: 1px solid #e8e8e8; /* Very light thread item border */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.03); /* Even subtler shadow */
+}
+
+.thread-item:hover {
+    background-color: #f9f9f9; /* Even lighter hover effect */
+}
+
+.thread-item h3 {
+    margin-top: 0;
+    margin-bottom: 4px; /* Less margin below thread title */
+    font-size: 1.1em; /* Slightly smaller thread title */
+    font-weight: bold;
+    color: #1a1a1b;
+    line-height: 1.3; /* Tighter line height for thread title */
+}
+
+.thread-item p {
+    margin: 0;
+    font-size: 0.85em; /* Smaller thread content text */
+    color: #555; /* Lighter thread content text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.thread-item .thread-meta { /* Meta information under thread title */
+    font-size: 0.8em; /* Smaller meta text */
+    color: #777; /* Even lighter meta text */
+    margin-top: 4px; /* Slight margin above meta text */
+}
+
+/* Thread View Section */
+#thread-view {
+    flex: 0 0 68%;
+    margin-right: 20px;
+}
+
+#thread-view h2 {
+    font-size: 1.3em; /* Slightly smaller thread view title */
+    margin-bottom: 8px; /* Less margin below view title */
+}
+
+#view-thread-content {
+    padding: 12px 18px; /* Adjusted padding in view content */
+    margin-bottom: 15px; /* Less margin below view content */
+    background-color: #fefefe; /* Very light view content background */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95em; /* Slightly smaller view content text */
+    line-height: 1.55; /* Slightly tighter line height for view content */
+}
+
+/* Comments Section */
+#comments-section {
+    margin-top: 15px; /* Less margin above comments */
+}
+
+.comment-list {
+    margin-top: 8px; /* Less margin above comment list */
+}
+
+.comment-item {
+    padding: 12px 15px; /* Adjusted padding in comment items */
+    margin-bottom: 6px; /* Even less margin between comments */
+    background-color: #fff;
+    border: 1px solid #eee; /* Very light comment border */
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.02); /* Even fainter shadow for comments */
+    margin-left: 20px;
+}
+
+.comment-item:first-child {
+    margin-top: 0;
+}
+
+.comment-item p {
+    margin: 0;
+    font-size: 0.85em; /* Smaller comment text */
+    color: #444;
+    word-wrap: break-word;
+    line-height: 1.5; /* Tighter line height for comments */
+}
+
+.comment-item p strong {
+    font-weight: bold;
+    color: #1a1a1b;
+    margin-right: 4px; /* Less margin after username */
+}
+
+
+/* Captcha Section */
+.captcha-section {
+    margin-bottom: 12px; /* Less margin below captcha */
+    margin-left: 12px; /* Consistent indentation */
+}
+
+.captcha-section label {
+    display: block;
+    margin-bottom: 4px; /* Less margin below captcha label */
+    font-size: 0.8em; /* Smaller captcha label */
+    color: #666; /* Lighter captcha label text */
+}
+
+/* Markdown Content Styling - Further Adjusted for Refinement */
+.markdown-content p, .markdown-content ul, .markdown-content ol {
+    margin-bottom: 0.7em; /* Tighter paragraph spacing in markdown */
+    font-size: 0.95em; /* Slightly smaller markdown text */
+    line-height: 1.55;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3,
+.markdown-content h4, .markdown-content h5, .markdown-content h6 {
+    margin-top: 1.1em; /* Tighter heading spacing in markdown */
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+.markdown-content h1 { font-size: 1.6em; } /* Slightly smaller markdown headings */
+.markdown-content h2 { font-size: 1.4em; }
+.markdown-content h3 { font-size: 1.25em; }
+.markdown-content h4 { font-size: 1.1em; }
+.markdown-content h5 { font-size: 1em; }
+.markdown-content h6 { font-size: 0.95em; }
+
+
+.markdown-content pre {
+    background-color: #f8f8f8; /* Even lighter code block background */
+    padding: 8px 12px; /* Smaller padding for code blocks */
+    border-radius: 3px;
+    overflow-x: auto;
+    font-size: 0.85em; /* Smaller code font */
+    border: 1px solid #ddd; /* Lighter code block border */
+}
+
+.markdown-content code {
+    font-family: monospace, monospace;
+    background-color: #eee;
+    padding: 1px 4px; /* Even smaller inline code padding */
+    border-radius: 2px;
+    font-size: 0.85em; /* Smaller inline code font */
+}
+
+.markdown-content blockquote {
+    margin-left: 1.2em; /* Less quote indent */
+    padding-left: 0.8em; /* Less quote padding */
+    border-left: 2px solid #ccc; /* Thinner quote border */
+    font-style: italic;
+    color: #666; /* Lighter quote text */
+}
+
+.markdown-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+.markdown-content a:hover {
+    text-decoration: underline;
+}
+
+
+/* Right Sidebar - Placeholder */
+#sidebar-section {
+    flex: 0 0 25%;
+    background-color: #fff;
+    border: 1px solid #e8e8e8; /* Very light sidebar border */
+    border-radius: 4px;
+    padding: 18px; /* Adjusted sidebar padding */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Even subtler sidebar shadow */
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+#sidebar-section h2 {
+    font-size: 1.1em; /* Smaller sidebar heading */
+    margin-top: 0;
+    margin-bottom: 12px; /* Less margin below sidebar heading */
+    font-weight: bold;
+    color: #333; /* Darker sidebar heading text */
+}
+
+/* Responsive Design - Further Refined */
+@media (max-width: 992px) {
+    .main-content {
+        flex-direction: column;
+        padding: 15px;
+    }
+    #threads-section, #thread-view {
+        flex: 1;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    #sidebar-section {
+        flex: 1;
+        position: static;
+        margin-top: 0;
+        margin-bottom: 15px;
+        padding: 15px; /* Adjusted sidebar padding on smaller screens */
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header h1 {
+        margin-bottom: 10px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .container {
+        margin: 0;
+        border-radius: 0;
+    }
+    .main-content {
+        padding: 10px;
+    }
+    .section {
+        padding: 10px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        margin-bottom: 10px; /* Less margin between sections on small screens */
+    }
+    #create-thread-section {
+        margin-bottom: 10px; /* Less margin for create thread section too */
+    }
+
+    .section h2, .section h3 {
+        margin: 10px; /* Less margin for section headings on small screens */
+        font-size: 1.1em; /* Slightly smaller headings on small screens */
+    }
+
+    input[type="text"], textarea, button {
+        font-size: 0.9em;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: calc(100% - 20px);
+        padding: 8px; /* Smaller input padding on small screens */
+    }
+    button {
+        margin-bottom: 10px;
+        padding: 8px 15px; /* Smaller button padding on small screens */
+    }
+    .captcha-section {
+        margin-left: 10px;
+        margin-bottom: 10px; /* Less margin for captcha on small screens */
+    }
+    .captcha-section label {
+        margin-bottom: 3px; /* Even less margin for captcha label */
+        font-size: 0.75em; /* Smaller captcha label on small screens */
+    }
+
+    .thread-item, #view-thread-content, .comment-item {
+        padding: 12px; /* Smaller padding for items on small screens */
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        margin-bottom: 4px; /* Even less margin between items on small screens */
+    }
+    .comment-item {
+        margin-left: 10px;
+    }
+    .thread-item h3 {
+        font-size: 1em; /* Smaller thread title on small screens */
+        margin-bottom: 3px; /* Even less margin below thread title */
+    }
+    .thread-item p, #view-thread-content, .comment-item p {
+        font-size: 0.8em; /* Smaller text in items on small screens */
+    }
+    #username-display {
+        font-size: 0.8em; /* Smaller username on small screens */
+        padding: 5px 8px; /* Smaller username padding */
+    }
+}

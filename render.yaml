@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: anonboard-backend
+    env: node
+    build:
+      nodeVersion: 16
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    healthCheckPath: /api/threads
+    staticPublishPath: ./frontend
+    routes:
+      - type: rewrite
+        source: /
+        destination: /index.html
