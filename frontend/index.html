@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="container">
@@ -21,21 +22,18 @@
                 <input type="text" id="thread-title" placeholder="Thread Title">
                 <textarea id="thread-content" placeholder="Thread Content (Markdown supported)"></textarea>
                 
-                <!-- File Input for Image -->
                 <div class="file-input-section">
                     <label for="thread-image">Image (Optional):</label>
                     <input type="file" id="thread-image" accept="image/*">
                 </div>
 
-                <!-- File Input for Video -->
                 <div class="file-input-section">
                     <label for="thread-video">Video (Optional):</label>
                     <input type="file" id="thread-video" accept="video/*">
                 </div>
 
                 <div class="captcha-section">
-                    <label for="thread-captcha">Captcha: What is 6 times 7? </label>
-                    <input type="text" id="thread-captcha" placeholder="Answer">
+                    <div class="g-recaptcha" data-sitekey="6Ld-XMoqAAAAACvDyAaQTnF5jq4wnsaE8fW6mw3h"></div>
                 </div>
                 <button id="create-thread-button">Create Thread</button>
             </section>
@@ -43,7 +41,6 @@
             <section id="threads-section" class="section">
                 <h2>Threads</h2>
                 <div id="thread-list" class="thread-list">
-                    <!-- Threads will be loaded here -->
                 </div>
             </section>
 
@@ -62,17 +59,12 @@
                 <section id="comments-section" class="section">
                     <h3>Comments</h3>
                     <div id="comment-list" class="comment-list">
-                        <!-- Comments will be loaded here -->
                     </div>
                 </section>
 
                 <section id="create-comment-section" class="section">
                     <h3>Add a Comment</h3>
                     <textarea id="comment-content" placeholder="Your comment (Markdown supported)"></textarea>
-                    <div class="captcha-section">
-                        <label for="comment-captcha">Captcha: What is 6 times 7? </label>
-                        <input type="text" id="comment-captcha" placeholder="Answer">
-                    </div>
                     <button id="create-comment-button">Post Comment</button>
                 </section>
                 <button id="back-to-threads" style="display:none;">Back to Threads (Bottom - hidden)</button>

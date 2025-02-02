@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const createThreadButton = document.getElementById('create-thread-button');
     const threadTitleInput = document.getElementById('thread-title');
     const threadContentInput = document.getElementById('thread-content');
-    const threadCaptchaInput = document.getElementById('thread-captcha');
     const threadsSection = document.getElementById('threads-section');
     const threadViewSection = document.getElementById('thread-view');
     const viewThreadTitleElement = document.getElementById('view-thread-title');
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentListDiv = document.getElementById('comment-list');
     const createCommentButton = document.getElementById('create-comment-button');
     const commentContentInput = document.getElementById('comment-content');
-    const commentCaptchaInput = document.getElementById('comment-captcha');
     const threadImageInput = document.getElementById('thread-image');
     const threadVideoInput = document.getElementById('thread-video');
     const viewThreadImage = document.getElementById('view-thread-image');
@@ -177,10 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
     createThreadButton.addEventListener('click', async () => {
         const title = threadTitleInput.value;
         const content = threadContentInput.value;
-        const captcha = threadCaptchaInput.value;
+        const captchaResponse = grecaptcha.getResponse();
 
-        if (!title || !content || !captcha) {
-            alert('Please fill in all fields and answer the captcha.');
+        if (!title || !content) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        if (!captchaResponse) {
+            alert('Please complete the reCAPTCHA.');
             return;
         }
 
@@ -191,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 username: currentUsername,
                 title,
                 content,
-                captcha,
-                imageData: uploadedImageData, // Send data URL
-                videoData: uploadedVideoData  // Send data URL
+                captcha: captchaResponse,
+                imageData: uploadedImageData,
+                videoData: uploadedVideoData
             })
         });
 
@@ -201,11 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Thread created successfully!');
             threadTitleInput.value = '';
             threadContentInput.value = '';
-            threadCaptchaInput.value = '';
             threadImageInput.value = ''; // Clear file input
             threadVideoInput.value = ''; // Clear file input
             uploadedImageData = null; // Reset data URL
             uploadedVideoData = null; // Reset data URL
+
+            // Reset the reCAPTCHA
+            grecaptcha.reset();
+
             // Don't fetch threads here, rely on 'newThread' event
             threadsSection.style.display = 'block';
             threadViewSection.style.display = 'none';
@@ -218,22 +224,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listener for creating a comment
     createCommentButton.addEventListener('click', async () => {
         const content = commentContentInput.value;
-        const captcha = commentCaptchaInput.value;
 
-        if (!content || !captcha) {
-            alert('Please fill in comment and captcha.');
+        if (!content) {
+            alert('Please fill in comment.');
             return;
         }
 
         const response = await fetch(`/api/threads/${currentThreadId}/comments`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ threadId: currentThreadId, username: currentUsername, content, captcha })
+            body: JSON.stringify({ 
+                threadId: currentThreadId, 
+                username: currentUsername, 
+                content
+            })
         });
 
         if (response.ok) {
             commentContentInput.value = '';
-            commentCaptchaInput.value = '';
             // Don't fetch comments here, rely on 'newComment' event
         } else {
             const errorData = await response.json();

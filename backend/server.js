@@ -1,8 +1,8 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const axios = require('axios');
 
 const app = express();
 const server = http.createServer(app);
@@ -16,10 +16,24 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 const db = require('./database');
 
+// reCAPTCHA v2 Secret Key:
+const RECAPTCHA_SECRET_KEY = '6Ld-XMoqAAAAABTzUIJzBpJCPzmepC9CfedWIGxy';
+
+async function verifyRecaptcha(response) {
+    const verificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${RECAPTCHA_SECRET_KEY}&response=${response}`;
+
+    try {
+        const { data } = await axios.post(verificationURL);
+        return data.success; // reCAPTCHA v2 only returns success/failure
+    } catch (error) {
+        console.error('reCAPTCHA verification error:', error);
+        return false;
+    }
+}
+
 io.on('connection', (socket) => {
     console.log('New client connected');
 
-    // Emit initial threads and username when a client connects
     db.getAllThreads((err, threads) => {
         if (!err) {
             socket.emit('initialThreads', threads);
@@ -48,11 +62,12 @@ app.get('/api/threads', (req, res) => {
     });
 });
 
-app.post('/api/threads', (req, res) => {
+app.post('/api/threads', async (req, res) => {
     const { username, title, content, captcha, imageData, videoData } = req.body;
 
-    if (captcha !== '42') {
-        return res.status(400).json({ error: 'Captcha verification failed.' });
+    const isCaptchaValid = await verifyRecaptcha(captcha);
+    if (!isCaptchaValid) {
+        return res.status(400).json({ error: 'reCAPTCHA verification failed.' });
     }
 
     db.createThread(username, title, content, imageData, videoData, (err) => {
@@ -79,13 +94,10 @@ app.get('/api/threads/:threadId/comments', (req, res) => {
     });
 });
 
-app.post('/api/threads/:threadId/comments', (req, res) => {
+// COMPLETELY REMOVED reCAPTCHA RELATED CODE FOR COMMENTS
+app.post('/api/threads/:threadId/comments', async (req, res) => {
     const threadId = parseInt(req.params.threadId, 10);
-    const { username, content, captcha } = req.body;
-
-    if (captcha !== '42') {
-        return res.status(400).json({ error: 'Captcha verification failed.' });
-    }
+    const { username, content } = req.body;
 
     db.createComment(threadId, username, content, (err) => {
         if (err) {
@@ -93,7 +105,6 @@ app.post('/api/threads/:threadId/comments', (req, res) => {
         }
         res.json({ message: 'Comment created successfully!' });
 
-        // Fetch the updated list of comments and emit the 'newComment' event
         db.getCommentsByThreadId(threadId, (err, comments) => {
             if (err) {
                 console.error('Error fetching updated comments:', err);
